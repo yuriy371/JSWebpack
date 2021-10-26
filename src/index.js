@@ -1,5 +1,4 @@
-import oneConLog from "./modules/one"
-import twoConLog from "./modules/two"
+import timer from "./modules/timer"
 
-oneConLog()
-twoConLog()
+
+timer("28 october 2021")
