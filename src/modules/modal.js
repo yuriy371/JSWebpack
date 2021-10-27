@@ -21,7 +21,7 @@ const modal = () => {
                 
                 if (winWidth < 768) {
                     clearInterval(animOp)
-                    modal.style.opacity = 1
+                    modal.style.opacity = ""
                 }
             }
         })
@@ -43,7 +43,7 @@ const modal = () => {
             
             if (winWidth < 768) {
                 clearInterval(animOp)
-                modal.style.opacity = 0
+                modal.style.opacity = ""
                 modal.style.display = "none"
             }
         }
