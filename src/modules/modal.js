@@ -4,9 +4,7 @@ const modal = () => {
     let popupClose = modal.querySelector(".popup-close")
     let winWidth = document.documentElement.clientWidth
 
-
     popupBtn.forEach(btn => {
-
         btn.addEventListener("click", () => {
             let item = 0
             modal.style.display = "block"
@@ -26,8 +24,6 @@ const modal = () => {
                     modal.style.opacity = 1
                 }
             }
-
-
         })
     })
 
