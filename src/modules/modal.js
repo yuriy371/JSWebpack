@@ -5,8 +5,6 @@ const modal = () => {
     let popupClose = modal.querySelector(".popup-close")
     let winWidth = document.documentElement.clientWidth
 
-    console.dir(winWidth);
-
     popupBtn.forEach(btn => {
         btn.addEventListener("click", () => {
             modal.style.display = "block"
