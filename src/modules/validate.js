@@ -6,13 +6,14 @@ const validate = () => {
 
     let validNumber = /[^\d]/g
     let validTextName =  /[^А-Я\s-]/gi
-    let validEmail = /[^a-z@\-_.!~*']{1,}/gi
+    
     let validPhone = /[^\d()-]/
     
     let mess = ""
 
     let validForm = (name, email, phone, mess) => {
         let isError = false
+        let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
         let nameMess = (mess !== "") ? name.value + mess.value : name.value
 
         if (!validTextName.test(nameMess) && nameMess !== "") {
@@ -22,7 +23,7 @@ const validate = () => {
             isError = true
         }
 
-        if (!validEmail.test(email.value) && email.value !== "") {
+        if (validEmail.test(email.value) && email.value !== "") {
             console.log("Правельная почта");
         } else {
             alert("Ведите почту, поле не должно быть пустым");
