@@ -1,12 +1,11 @@
 const validate = () => {
     let calcItem = document.querySelectorAll(".calc-item")
-    let formApplicat2 = document.querySelectorAll("#form1")
-    let formReuest2 = document.querySelectorAll("#form2")
-    let formModal2 = document.querySelectorAll("#form3")
+    let formApplicat = document.querySelectorAll("#form1")
+    let formReuest = document.querySelectorAll("#form2")
+    let formModal = document.querySelectorAll("#form3")
 
     let validNumber = /[^\d]/g
     let validTextName = /[^А-Я\s-]/gi
-    let validEmail = /[^a-z@\-_.!~*']{1,}/gi
     let validPhone = /[^\d()\-+]/g
 
     let check = (item) => {
@@ -20,13 +19,15 @@ const validate = () => {
             name.value = name.value[0].toUpperCase() + name.value.slice(1)
             console.log("кирилица");
         } else {
-            name.value = ""
+            name.value = name.value.replace(validTextName, "")
         }
     }
 
     let checkEmail = (email) => {
-        if (!validEmail.test(email.value) && email.value !== "") {
-            console.log("почта");
+        let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
+
+        if (validEmail.test(email.value) && email.value !== "") {
+            console.log("правельно");
         } else {
             email.value = ""
         }
@@ -36,18 +37,17 @@ const validate = () => {
         if (!validPhone.test(phone.value) && phone.value !== "") {
             console.log("Правельный телефон");
         } else {
-            phone.value = ""
+            phone.value = phone.value.replace(validPhone, "")
         }
     }
 
-    formApplicat2.forEach(item => {
+    formApplicat.forEach(item => {
         let btn = item.querySelector(".form-btn")
         let inputName = item.querySelector(".form-name")
         let inputEmail = item.querySelector(".form-email")
         let inputPhone = item.querySelector(".form-phone")
 
         inputName.addEventListener("blur", () => {
-            console.log(inputName);
             check(inputName)
             checkName(inputName)
         })
@@ -70,7 +70,7 @@ const validate = () => {
         })
     })
 
-    formReuest2.forEach(item => {
+    formReuest.forEach(item => {
         let btn = item.querySelector(".form-btn")
         let inputName = item.querySelector(".form-name")
         let inputEmail = item.querySelector(".form-email")
@@ -105,7 +105,7 @@ const validate = () => {
         })
     })
 
-    formModal2.forEach(item => {
+    formModal.forEach(item => {
         let btn = item.querySelector(".form-btn")
         let inputName = item.querySelector(".form-name")
         let inputEmail = item.querySelector(".form-email")
@@ -125,7 +125,7 @@ const validate = () => {
             check(inputPhone)
             checkPhone(inputPhone)
         })
-        
+
         btn.addEventListener("click", () => {
             inputName.value = ""
             inputEmail.value = ""
