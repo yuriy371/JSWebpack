@@ -1,5 +1,5 @@
 const menu = () => {
-    let menuBtn = document.querySelector("header")
+    let menuBtn = document.querySelector(".menu")
     let menu = document.querySelector("menu")
     let scroll = document.querySelector("a[href='#service-block']")
 
