@@ -27,6 +27,7 @@ const modal = () => {
     })
 
     modal.addEventListener("click", (e) => {
+        console.log(!e.target.closest(".popup-content"));
         if (!e.target.closest(".popup-content") || e.target.classList.contains("popup-close")) {
             let item = 1
             modal.style.opacity = 1

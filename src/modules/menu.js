@@ -1,7 +1,7 @@
 const menu = () => {
-    let menuBtn = document.querySelector(".menu")
     let menu = document.querySelector("menu")
     let scroll = document.querySelector("a[href='#service-block']")
+    let body = document.querySelector("body")
 
     let handleMenu = () => {
         menu.classList.toggle("active-menu")
@@ -15,25 +15,21 @@ const menu = () => {
         })
     }
 
-    menuBtn.addEventListener("click", (e) => {
+    body.addEventListener("click", (e) => {
+        console.log(!e.target.closest("menu"));
         if (e.target.closest(".menu")) {
             handleMenu()
-        }
-    })
-
-    scroll.addEventListener("click", (e) => {
-        e.preventDefault()
-        smoothScroll(scroll)
-    })
-
-    menu.addEventListener("click", (e) => {
-        let nameTag = e.target
-        if (e.target.matches("ul>li>a")) {
+        } else if (e.target.matches("ul>li>a")) {
             e.preventDefault()
             handleMenu()
-            smoothScroll(nameTag)
-        } else if (e.target.closest(".close-btn")) {
+            smoothScroll(e.target)
+        } else if (!e.target.closest("menu") || e.target.classList.contains("close-btn")) {
             handleMenu()
+        } else if (e.target.closest(".menu")) {
+            handleMenu()
+        } else if (e.target.closest("a[href='#service-block']")) {
+            e.preventDefault()
+            smoothScroll(scroll)
         } else {
             return
         }
