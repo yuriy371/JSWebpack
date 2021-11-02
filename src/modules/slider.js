@@ -1,7 +1,7 @@
-const slider = () => {
-    let sliderBlock = document.querySelector(".portfolio-content")
-    let slides = document.querySelectorAll(".portfolio-item")
-    let portfolioDots = document.querySelector(".portfolio-dots")
+const slider = (classSliderBlock, classSlides, classDots, slideAct = "portfolio-item-active", dotAct="dot-active") => {
+    let sliderBlock = document.querySelector(classSliderBlock)
+    let slides = document.querySelectorAll(classSlides)
+    let portfolioDots = document.querySelector(classDots)
     let dots = []
 
     let timeInterval = 2000
@@ -14,7 +14,7 @@ const slider = () => {
             let liDot = document.createElement("li")
 
             if (index === 0) {
-                liDot.className = "dot dot-active"
+                liDot.className = `dot ${dotAct}`
             } else {
                 liDot.className = "dot"
             }
@@ -34,8 +34,8 @@ const slider = () => {
     }
 
     let autoSlide = () => {
-        prevSlide(slides, currentSlide, "portfolio-item-active")
-        prevSlide(dots, currentSlide, "dot-active")
+        prevSlide(slides, currentSlide, slideAct)
+        prevSlide(dots, currentSlide, dotAct)
 
         currentSlide++
 
@@ -43,8 +43,8 @@ const slider = () => {
             currentSlide = 0
         }
 
-        nextSlide(slides, currentSlide, "portfolio-item-active")
-        nextSlide(dots, currentSlide, "dot-active")
+        nextSlide(slides, currentSlide, slideAct)
+        nextSlide(dots, currentSlide, dotAct)
     }
 
     let startSlide = (timer = 1500) => {
@@ -55,6 +55,10 @@ const slider = () => {
         clearInterval(interval)
     }
 
+    if (!(classSliderBlock[0] === "." && classSliderBlock !== "") || !(classSlides[0] === "." && classSlides !== "")) {
+        return
+    }
+
     sliderBlock.addEventListener("click", (e) => {
         e.preventDefault()
 
@@ -62,8 +66,8 @@ const slider = () => {
             return
         }
 
-        prevSlide(slides, currentSlide, "portfolio-item-active")
-        prevSlide(dots, currentSlide, "dot-active")
+        prevSlide(slides, currentSlide, slideAct)
+        prevSlide(dots, currentSlide, dotAct)
 
         if (e.target.matches("#arrow-right")) {
             currentSlide++
@@ -85,8 +89,8 @@ const slider = () => {
             currentSlide = slides.length - 1
         }
 
-        nextSlide(slides, currentSlide, "portfolio-item-active")
-        nextSlide(dots, currentSlide, "dot-active")
+        nextSlide(slides, currentSlide, slideAct)
+        nextSlide(dots, currentSlide, dotAct)
     })
 
     sliderBlock.addEventListener("mouseenter", (e) => {
