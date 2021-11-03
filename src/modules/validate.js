@@ -1,12 +1,18 @@
 const validate = () => {
-    let calcItem = document.querySelectorAll(".calc-item")
+    let calcSquare = document.querySelectorAll(".calc-square")
+    let calcCount = document.querySelectorAll(".calc-count")
+    let calcDay = document.querySelectorAll(".calc-day")
     let formApplicat = document.querySelectorAll("#form1")
     let formReuest = document.querySelectorAll("#form2")
     let formModal = document.querySelectorAll("#form3")
 
+    let calcItem = [...calcSquare, ...calcCount, ...calcDay]
+
     let validNumber = /[^\d]/g
     let validTextName = /[^А-Я\s-]/gi
     let validPhone = /[^\d()\-+]/g
+
+    // console.log(!validNumber.test(1.4));
 
     let check = (item) => {
         item.value = item.value.replace(/\s+/, " ")
@@ -134,10 +140,8 @@ const validate = () => {
     })
 
     calcItem.forEach(item => {
-        item.addEventListener("blur", () => {
-            if (!validNumber.test(item.value)) {
-                console.log("число");
-            } else {
+        item.addEventListener("input", () => {
+            if (validNumber.test(item.value)) {
                 item.value = item.value.replace(validNumber, "")
             }
         })
