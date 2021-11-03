@@ -6,27 +6,21 @@ const calc = (price = 100) => {
     let calcDay = document.querySelector(".calc-day")
     let total = document.getElementById("total")
 
-    
-
-    let outNum = (num, elem) => {
-        let step = 1;
-        let n = 0;
+    let outNum = (num, shift = 10, speed = 1) => {
         let interval = setInterval(() => {
-            n += step;
-            if (n == num) {
-                clearInterval(interval);
+            if (total.innerHTML * 1 + shift >= num) {
+                total.innerHTML = num
+                clearInterval(interval)
+            } else {
+                total.innerHTML = total.innerHTML * 1 + shift
             }
-            
             calcBlok.addEventListener("input", (e) => {
                 if (e.target === calcType || e.target === calcSquare ||
                     e.target === calcCount || e.target === calcDay) {
-                        clearInterval(interval);
+                    clearInterval(interval);
                 }
             })
-
-            elem.innerHTML = n;
-        }, 1);
-        console.log(num, elem);
+        }, speed)
     }
 
     let coutCalc = () => {
@@ -49,9 +43,10 @@ const calc = (price = 100) => {
 
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue
-            outNum(totalValue, total)
+            outNum(totalValue, 50, 1)
         } else {
             totalValue = 0
+            outNum(totalValue)
         }
     }
 
