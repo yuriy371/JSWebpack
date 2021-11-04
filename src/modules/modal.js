@@ -1,3 +1,4 @@
+import { animate } from "./helpers"
 const modal = () => {
     let popupBtn = document.querySelectorAll(".popup-btn")
     let modal = document.querySelector(".popup")
@@ -5,46 +6,45 @@ const modal = () => {
 
     popupBtn.forEach(btn => {
         btn.addEventListener("click", () => {
-            let item = 0
             modal.style.display = "block"
-            modal.style.opacity = 0
 
-            if (modal.style.opacity == 0) {
-                let animOp = setInterval(() => {
-                    if (item >= 1) {
-                        clearInterval(animOp)
+            if (winWidth < 768) {
+                clearInterval(animate)
+                modal.style.opacity = ""
+            } else {
+                animate({
+                    duration: 600,
+                    timing(timeFraction) {
+                        return timeFraction
+                    },
+                    draw(progress) {
+                        modal.style.opacity = progress
+                        console.log("start:", modal.style.opacity);
                     }
-                    modal.style.opacity = item
-                    item += 0.1
-                }, 40)
-
-                if (winWidth < 768) {
-                    clearInterval(animOp)
-                    modal.style.opacity = ""
-                }
+                });
             }
         })
     })
 
     modal.addEventListener("click", (e) => {
         if (!e.target.closest(".popup-content") || e.target.classList.contains("popup-close")) {
-            let item = 1
-            modal.style.opacity = 1
-
-            if (modal.style.opacity == 1) {
-                let animOp = setInterval(() => {
-                    if (item <= 0.1) {
-                        clearInterval(animOp)
-                        modal.style.display = "none"
-                    }
-                    modal.style.opacity = item
-                    item -= item * 0.1
-                }, 20)
-
-                if (winWidth < 768) {
-                    clearInterval(animOp)
-                    modal.style.opacity = ""
-                    modal.style.display = "none"
+            if (winWidth < 768) {
+                modal.style.display = "none"
+            } else {
+                if (modal.style.opacity == 1) {
+                    animate({
+                        duration: 500,
+                        timing(timeFraction) {
+                            return timeFraction;
+                        },
+                        draw(progress) {
+                            modal.style.opacity = 1 - progress
+                            console.log("end:", modal.style.opacity);
+                            if (modal.style.opacity == 0) {
+                                modal.style.display = "none"
+                            }
+                        }
+                    });
                 }
             }
         }
