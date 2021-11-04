@@ -1,4 +1,5 @@
 import { animate } from "./helpers"
+
 const modal = () => {
     let popupBtn = document.querySelectorAll(".popup-btn")
     let modal = document.querySelector(".popup")
@@ -19,7 +20,6 @@ const modal = () => {
                     },
                     draw(progress) {
                         modal.style.opacity = progress
-                        console.log("start:", modal.style.opacity);
                     }
                 });
             }
@@ -39,7 +39,7 @@ const modal = () => {
                         },
                         draw(progress) {
                             modal.style.opacity = 1 - progress
-                            console.log("end:", modal.style.opacity);
+
                             if (modal.style.opacity == 0) {
                                 modal.style.display = "none"
                             }

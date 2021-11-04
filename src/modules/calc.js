@@ -1,3 +1,5 @@
+import { animate } from "./helpers"
+
 const calc = (price = 100) => {
     let calcBlok = document.querySelector(".calc-block")
     let calcType = document.querySelector(".calc-type")
@@ -6,21 +8,16 @@ const calc = (price = 100) => {
     let calcDay = document.querySelector(".calc-day")
     let total = document.getElementById("total")
 
-    let outNum = (num, shift = 10, speed = 1) => {
-        let interval = setInterval(() => {
-            if (total.innerHTML * 1 + shift >= num) {
-                total.innerHTML = num
-                clearInterval(interval)
-            } else {
-                total.innerHTML = total.innerHTML * 1 + shift
+    let outNum = (num) => {
+        animate({
+            duration: 200,
+            timing(timeFraction) {
+                return timeFraction;
+            },
+            draw(progress) {
+                total.innerHTML = Math.round(num * progress)
             }
-            calcBlok.addEventListener("input", (e) => {
-                if (e.target === calcType || e.target === calcSquare ||
-                    e.target === calcCount || e.target === calcDay) {
-                    clearInterval(interval);
-                }
-            })
-        }, speed)
+        });
     }
 
     let coutCalc = () => {
@@ -43,7 +40,7 @@ const calc = (price = 100) => {
 
         if (calcType.value && calcSquare.value) {
             totalValue = price * calcTypeValue * calcSquareValue * calcCountValue * calcDayValue
-            outNum(totalValue, 50, 1)
+            outNum(totalValue)
         } else {
             totalValue = 0
             outNum(totalValue)
