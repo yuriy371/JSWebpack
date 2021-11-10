@@ -12,132 +12,130 @@ const validate = () => {
     let validTextName = /[^А-Я\s-]/gi
     let validPhone = /[^\d()\-+]/g
 
-    // console.log(!validNumber.test(1.4));
+    // let check = (item) => {
+    //     item.value = item.value.replace(/\s+/, " ")
+    //     item.value = item.value.replace(/-+/, "-")
+    //     item.value = item.value.replace(/(^[\s\-]+)/g, "").replace(/[\s\-]+$/g, "")
+    // }
 
-    let check = (item) => {
-        item.value = item.value.replace(/\s+/, " ")
-        item.value = item.value.replace(/-+/, "-")
-        item.value = item.value.replace(/(^[\s\-]+)/g, "").replace(/[\s\-]+$/g, "")
-    }
+    // let checkName = (name) => {
+    //     if (!validTextName.test(name.value) && name.value !== "") {
+    //         name.value = name.value[0].toUpperCase() + name.value.slice(1)
+    //         console.log("кирилица");
+    //     } else {
+    //         name.value = name.value.replace(validTextName, "")
+    //     }
+    // }
 
-    let checkName = (name) => {
-        if (!validTextName.test(name.value) && name.value !== "") {
-            name.value = name.value[0].toUpperCase() + name.value.slice(1)
-            console.log("кирилица");
-        } else {
-            name.value = name.value.replace(validTextName, "")
-        }
-    }
+    // let checkEmail = (email) => {
+    //     let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
 
-    let checkEmail = (email) => {
-        let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
+    //     if (validEmail.test(email.value) && email.value !== "") {
+    //         console.log("правельно");
+    //     } else {
+    //         email.value = ""
+    //     }
+    // }
 
-        if (validEmail.test(email.value) && email.value !== "") {
-            console.log("правельно");
-        } else {
-            email.value = ""
-        }
-    }
+    // let checkPhone = (phone) => {
+    //     if (!validPhone.test(phone.value) && phone.value !== "") {
+    //         console.log("Правельный телефон");
+    //     } else {
+    //         phone.value = phone.value.replace(validPhone, "")
+    //     }
+    // }
 
-    let checkPhone = (phone) => {
-        if (!validPhone.test(phone.value) && phone.value !== "") {
-            console.log("Правельный телефон");
-        } else {
-            phone.value = phone.value.replace(validPhone, "")
-        }
-    }
+    // formApplicat.forEach(item => {
+    //     let btn = item.querySelector(".form-btn")
+    //     let inputName = item.querySelector(".form-name")
+    //     let inputEmail = item.querySelector(".form-email")
+    //     let inputPhone = item.querySelector(".form-phone")
 
-    formApplicat.forEach(item => {
-        let btn = item.querySelector(".form-btn")
-        let inputName = item.querySelector(".form-name")
-        let inputEmail = item.querySelector(".form-email")
-        let inputPhone = item.querySelector(".form-phone")
+    //     inputName.addEventListener("input", () => {
+    //         check(inputName)
+    //         checkName(inputName)
+    //     })
 
-        inputName.addEventListener("blur", () => {
-            check(inputName)
-            checkName(inputName)
-        })
+    //     inputEmail.addEventListener("input", () => {
+    //         check(inputEmail)
+    //         checkEmail(inputEmail)
+    //     })
 
-        inputEmail.addEventListener("blur", () => {
-            check(inputEmail)
-            checkEmail(inputEmail)
-        })
+    //     inputPhone.addEventListener("input", () => {
+    //         check(inputPhone)
+    //         checkPhone(inputPhone)
+    //     })
 
-        inputPhone.addEventListener("blur", () => {
-            check(inputPhone)
-            checkPhone(inputPhone)
-        })
+    //     btn.addEventListener("click", (e) => {
+    //         e.preventDefault()
+    //         inputName.value = ""
+    //         inputEmail.value = ""
+    //         inputPhone.value = ""
+    //     })
+    // })
 
-        btn.addEventListener("click", (e) => {
-            e.preventDefault()
-            inputName.value = ""
-            inputEmail.value = ""
-            inputPhone.value = ""
-        })
-    })
+    // formReuest.forEach(item => {
+    //     let btn = item.querySelector(".form-btn")
+    //     let inputName = item.querySelector(".form-name")
+    //     let inputEmail = item.querySelector(".form-email")
+    //     let inputPhone = item.querySelector(".form-phone")
+    //     let inputMess = item.querySelector(".mess")
 
-    formReuest.forEach(item => {
-        let btn = item.querySelector(".form-btn")
-        let inputName = item.querySelector(".form-name")
-        let inputEmail = item.querySelector(".form-email")
-        let inputPhone = item.querySelector(".form-phone")
-        let inputMess = item.querySelector(".mess")
+    //     inputName.addEventListener("blur", () => {
+    //         check(inputName)
+    //         checkName(inputName)
+    //     })
 
-        inputName.addEventListener("blur", () => {
-            check(inputName)
-            checkName(inputName)
-        })
+    //     inputMess.addEventListener("blur", () => {
+    //         check(inputMess)
+    //         checkName(inputMess)
+    //     })
 
-        inputMess.addEventListener("blur", () => {
-            check(inputMess)
-            checkName(inputMess)
-        })
+    //     inputEmail.addEventListener("blur", () => {
+    //         check(inputEmail)
+    //         checkEmail(inputEmail)
+    //     })
 
-        inputEmail.addEventListener("blur", () => {
-            check(inputEmail)
-            checkEmail(inputEmail)
-        })
+    //     inputPhone.addEventListener("blur", () => {
+    //         check(inputPhone)
+    //         checkPhone(inputPhone)
+    //     })
 
-        inputPhone.addEventListener("blur", () => {
-            check(inputPhone)
-            checkPhone(inputPhone)
-        })
+    //     btn.addEventListener("click", () => {
+    //         inputName.value = ""
+    //         inputEmail.value = ""
+    //         inputPhone.value = ""
+    //         inputMess.value = ""
+    //     })
+    // })
 
-        btn.addEventListener("click", () => {
-            inputName.value = ""
-            inputEmail.value = ""
-            inputPhone.value = ""
-            inputMess.value = ""
-        })
-    })
+    // formModal.forEach(item => {
+    //     let btn = item.querySelector(".form-btn")
+    //     let inputName = item.querySelector(".form-name")
+    //     let inputEmail = item.querySelector(".form-email")
+    //     let inputPhone = item.querySelector(".form-phone")
 
-    formModal.forEach(item => {
-        let btn = item.querySelector(".form-btn")
-        let inputName = item.querySelector(".form-name")
-        let inputEmail = item.querySelector(".form-email")
-        let inputPhone = item.querySelector(".form-phone")
+    //     inputName.addEventListener("blur", () => {
+    //         check(inputName)
+    //         checkName(inputName)
+    //     })
 
-        inputName.addEventListener("blur", () => {
-            check(inputName)
-            checkName(inputName)
-        })
+    //     inputEmail.addEventListener("blur", () => {
+    //         check(inputEmail)
+    //         checkEmail(inputEmail)
+    //     })
 
-        inputEmail.addEventListener("blur", () => {
-            check(inputEmail)
-            checkEmail(inputEmail)
-        })
+    //     inputPhone.addEventListener("blur", () => {
+    //         check(inputPhone)
+    //         checkPhone(inputPhone)
+    //     })
 
-        inputPhone.addEventListener("blur", () => {
-            check(inputPhone)
-            checkPhone(inputPhone)
-        })
-
-        btn.addEventListener("click", () => {
-            inputName.value = ""
-            inputEmail.value = ""
-            inputPhone.value = ""
-        })
-    })
+    //     btn.addEventListener("click", () => {
+    //         inputName.value = ""
+    //         inputEmail.value = ""
+    //         inputPhone.value = ""
+    //     })
+    // })
 
     calcItem.forEach(item => {
         item.addEventListener("input", () => {
