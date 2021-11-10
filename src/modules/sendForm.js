@@ -11,13 +11,12 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
     let validSuccess = (item) => {
         let validTextName = /[^А-Я\s-]/gi
         let validPhone = /[^\d()\-+]/g
+        let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
 
         let name = item.querySelector("[name='user_name']")
         let phone = item.querySelector("[name='user_phone']")
         let email = item.querySelector("[name='user_email']")
         let mess = item.querySelector("[name='user_message']")
-        email.classList.add("success")
-        let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
 
         if (validEmail.test(email.value) && email.value !== "") {
             statusBlock.remove()
@@ -56,7 +55,7 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         }
     }
 
-    let validate = (list, item) => {
+    let validate = (list) => {
         let success = true
 
         list.forEach(input => {
@@ -101,7 +100,7 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
                 formBody[elem.id] = element.value
             }
         })
-        console.log(validate(formElements, item));
+
         if (validate(formElements, item)) {
             sendData(formBody).then(data => {
                 statusBlock.textContent = successText
@@ -124,21 +123,19 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
 
         form.addEventListener("submit", (e) => {
             e.preventDefault()
-
             submitForm(form)
         })
 
         formModal.addEventListener("submit", (e) => {
             e.preventDefault()
-
             submitForm(formModal)
         })
 
         formMess.addEventListener("submit", (e) => {
             e.preventDefault()
-
             submitForm(formMess)
         })
+
         form.addEventListener("input", () => { validSuccess(form) })
         formModal.addEventListener("input", () => { validSuccess(formModal) })
         formMess.addEventListener("input", () => { validSuccess(formMess) })
