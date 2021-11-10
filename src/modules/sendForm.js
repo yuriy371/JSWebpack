@@ -1,3 +1,4 @@
+import { animate } from "./helpers"
 const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
     let form = document.getElementById(formId)
     let formModal = document.getElementById(formIdModal)
@@ -20,6 +21,8 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
 
         if (validEmail.test(email.value) && email.value !== "") {
             statusBlock.remove()
+            statusBlock.textContent = ""
+            statusBlock.style.color = ""
             email.classList.add("success")
         } else {
             email.classList.remove("success")
@@ -68,14 +71,15 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         return success
     }
 
-    let sendData = (data) => {
-        return fetch("https://jsonplaceholder.typicode.com/posts", {
+    let sendData = async (data) => {
+        const res = await fetch("https://jsonplaceholder.typicode.com/posts", {
             method: "POST",
             body: JSON.stringify(data),
             headers: {
                 'Content-type': 'application/json; charset=UTF-8'
             }
-        }).then(res => res.json())
+        })
+        return await res.json()
     }
 
     let submitForm = (item) => {
@@ -83,8 +87,24 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         let formData = new FormData(item)
         let formBody = {}
 
-        statusBlock.textContent = loadText
-        statusBlock.style.color = "#ffffff"
+        statusBlock.style.cssText = `
+        width: 20px;
+        height: 20px;
+        margin: auto;
+        background-color: #337ab7;
+        border-radius: 20%;
+        color: #ffffff;
+        `
+        animate({
+            duration: 1000,
+            timing(timeFraction) {
+                return timeFraction
+            },
+            draw(progress) {
+                statusBlock.style.opacity = progress
+            }
+        });
+
         item.append(statusBlock)
 
         formData.forEach((val, key) => {
@@ -101,8 +121,10 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
             }
         })
 
-        if (validate(formElements, item)) {
+        if (validate(formElements)) {
             sendData(formBody).then(data => {
+                statusBlock.style.cssText = ""
+                statusBlock.style.color = "#ffffff"
                 statusBlock.textContent = successText
                 formElements.forEach(input => {
                     input.value = ""
