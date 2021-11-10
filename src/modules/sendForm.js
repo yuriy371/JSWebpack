@@ -9,9 +9,15 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
     let errorText = "Ошибка"
     let successText = "Спасибо! Наш менеджер с вами свяжется."
 
+    let check = (item) => {
+        item.value = item.value.replace(/\s+/, " ")
+        item.value = item.value.replace(/-+/, "-").replace(/\++/, "+")
+        item.value = item.value.replace(/(^[\s\-]+)/g, "").replace(/[\s\-]+$/g, "")
+    }
+
     let validSuccess = (item) => {
         let validTextName = /[^А-Я\s-]/gi
-        let validPhone = /[^\d()\-+]/g
+        let validPhone = /[^\d\+]/g
         let validEmail = /^([A-Z\d_\-\.!~*'])+\@([A-Z\d])+\.([A-Z]{2,3})$/gi
 
         let name = item.querySelector("[name='user_name']")
@@ -20,18 +26,25 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         let mess = item.querySelector("[name='user_message']")
 
         if (validEmail.test(email.value) && email.value !== "") {
+            check(email)
             statusBlock.remove()
             statusBlock.textContent = ""
             statusBlock.style.color = ""
             email.classList.add("success")
         } else {
+            check(email)
             email.classList.remove("success")
             statusBlock.textContent = "Почта введена не правильно"
-            statusBlock.style.color = "#ffffff"
+            statusBlock.style.cssText = `
+            color: #eeff00;
+            font-size: 19px;
+            padding: 10px 0;
+            `
             item.append(statusBlock)
         }
 
         if (!validTextName.test(name.value) && name.value !== "") {
+            check(name)
             name.classList.add("success")
             name.value = name.value.replace(validTextName, "")
         } else {
@@ -41,6 +54,7 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
 
         if (mess) {
             if (!validTextName.test(mess.value) && mess.value !== "") {
+                check(mess)
                 mess.classList.add("success")
                 mess.value = mess.value.replace(validTextName, "")
             } else {
@@ -50,6 +64,7 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         }
 
         if (!validPhone.test(phone.value) && phone.value !== "") {
+            check(phone)
             phone.classList.add("success")
             phone.value = phone.value.replace(validPhone, "")
         } else {
@@ -114,9 +129,9 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
         someElem.forEach(elem => {
             let element = document.getElementById(elem.id)
 
-            if (elem.type === "block") {
+            if (elem.type === "block" && element.textContent !== "0") {
                 formBody[elem.id] = element.textContent
-            } else if (elem.type === "input") {
+            } else if (elem.type === "input" && element.textContent !== 0) {
                 formBody[elem.id] = element.value
             }
         })
