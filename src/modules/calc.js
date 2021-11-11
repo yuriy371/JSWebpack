@@ -46,7 +46,11 @@ const calc = (price = 100) => {
             outNum(totalValue, 50, 1)
         } else {
             totalValue = 0
+            calcSquare.value = ""
+            calcCount.value = ""
+            calcDay.value = ""
             outNum(totalValue)
+            
         }
     }
 

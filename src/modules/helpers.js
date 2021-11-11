@@ -19,4 +19,11 @@ const animate = ({ timing, draw, duration }) => {
     });
 }
 
-export {animate}
+const avtoCloseModal = ({ elemModal }) => {
+    let modal = document.querySelector(".popup")
+    elemModal(modal)
+    // console.log(elemModal);
+    // console.log(modal);
+}
+
+export { animate, avtoCloseModal }

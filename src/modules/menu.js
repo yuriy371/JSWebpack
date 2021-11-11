@@ -33,6 +33,7 @@ const menu = () => {
             handleMenu()
             smoothScroll(nameTag)
         } else if (e.target.closest(".close-btn")) {
+            e.preventDefault()
             handleMenu()
         } else {
             return

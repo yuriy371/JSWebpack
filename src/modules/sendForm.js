@@ -1,3 +1,4 @@
+import { animate, avtoCloseModal } from "./helpers"
 const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
     let form = document.getElementById(formId)
     let formModal = document.getElementById(formIdModal)
@@ -119,6 +120,32 @@ const sendForm = ({ formId, formIdModal, formIdMess, someElem = [] }) => {
 
         if (validate(formElements, item)) {
             sendData(formBody).then(data => {
+                let clearStatBlock = setInterval(() => {
+                    if (statusBlock) {
+                        avtoCloseModal({
+                            elemModal(modal) {
+                                if (modal.style.opacity == 1) {
+                                    animate({
+                                        duration: 500,
+                                        timing(timeFraction) {
+                                            return timeFraction;
+                                        },
+                                        draw(progress) {
+                                            modal.style.opacity = 1 - progress
+                
+                                            if (modal.style.opacity == 0) {
+                                                modal.style.display = "none"
+                                            }
+                                        }
+                                    });
+                                }
+                            }
+                        })
+                        statusBlock.remove()
+                        clearInterval(clearStatBlock)
+                    }
+                }, 3000)
+                
                 statusBlock.textContent = successText
                 formElements.forEach(input => {
                     input.value = ""
